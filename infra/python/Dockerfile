@@ -6,7 +6,6 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
 RUN mkdir /code/backend
 # 指定したディレクトリ（/code）をルートディレクトリにする
-# WORKDIR /code
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - \
 	&& curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 	&& echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
