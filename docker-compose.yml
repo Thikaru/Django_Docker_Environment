@@ -1,16 +1,28 @@
 version: '3'
 services:
-  mysql:
+  db:
     build:
       context: .
       dockerfile: ./infra/mysql/Dockerfile
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
-    image: mysql:latest
+    # environment:
+    #   MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    # image: mysql/mysql-server:latest
     platform: linux/amd64
-    # volumes:
-    #   - ./mysql:/var/lib/mysql
+    # platform: linux/x86_64
+    # platform: linux/arm64
+    # command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
+    #           --default-authentication-plugin=mysql_native_password
+    # environment:
+    #   MYSQL_DATABASE : "Django_Test" 
+    #   MYSQL_USER : "root"
+    #   MYSQL_PASSWORD : "user_pass"
+    #   MYSQL_ROOT_PASSWORD : "root"
+    #   TZ : "Asia/Tokyo"
+    volumes:
+      - mysql_data:/var/lib/mysql
     ports:
       - 127.0.0.1:3318:3306
+    restart: always
 
   web:
     build: 
@@ -18,22 +30,23 @@ services:
       dockerfile: ./infra/python/Dockerfile
     command: python3 manage.py runserver 0.0.0.0:8555
     volumes:
-      - .:/code
+      - ./backend:/code/backend
     ports:
-      - "8555:8100"
+      - "8555:8555"
     depends_on:
-      - mysql
+      - db
+    restart: always
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
     ports:
       - '127.0.0.1:8777:80'
     environment:
-      - PMA_HOST=mysql
-      # - PMA_USER=root
-      # - PMA_PASSWORD=password
+      PMA_HOST : 'db'
+      PMA_USER : 'root'
+      PMA_PASSWORD : 'user_pass'
     depends_on:
-      - mysql
+      - db
 
 volumes:
   mysql_data: # データ永続化のため
