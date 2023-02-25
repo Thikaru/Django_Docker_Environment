@@ -4,20 +4,7 @@ services:
     build:
       context: .
       dockerfile: ./infra/mysql/Dockerfile
-    # environment:
-    #   MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-    # image: mysql/mysql-server:latest
     platform: linux/amd64
-    # platform: linux/x86_64
-    # platform: linux/arm64
-    # command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
-    #           --default-authentication-plugin=mysql_native_password
-    # environment:
-    #   MYSQL_DATABASE : "Django_Test" 
-    #   MYSQL_USER : "root"
-    #   MYSQL_PASSWORD : "user_pass"
-    #   MYSQL_ROOT_PASSWORD : "root"
-    #   TZ : "Asia/Tokyo"
     volumes:
       - mysql_data:/var/lib/mysql
     ports:

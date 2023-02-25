@@ -51,9 +51,10 @@ backend に配置する
 ## 100．参考文献・参考資料・参考サイト・引用サイト
 
 - [Docker Django MySQL phpMyAdmin 環境構築](https://note.com/akiroppongi/n/n313073e458ca)[日付:2023/02/25]
-- [GUI おすすめ](https://www.simugrammer.com/python_gui_matome/)[日付:2023/02/25]
-- [Python でも簡単に GUI 作成](https://qiita.com/konitech913/items/61dc715ddaad54505a29)[日付:2023/02/25]
-- [OpenCV で幾何変換](https://note.nkmk.me/python-opencv-warp-affine-perspective/)[日付:2023/02/25]
-- [TEST](https://www)[日付:2023/02/25]
-- [文字列](URL) [日付:2023/02/25]
-- [文字列](URL) [日付:2023/02/25]
+- [Django+MySQL の開発環境を docker-compose で構築する](https://qiita.com/bakupen/items/f23ce3d2325b4491a2dd)[日付:2023/02/25]
+- [Django,MySQL,phpMyAdmin の環境を Docker で構築](https://note.com/akiroppongi/n/n313073e458ca)[日付:2023/02/25]
+- [【django】Docker で簡単に開発環境](https://self-methods.com/django-docker-easy/)[日付:2023/02/25]
+- [【Docker】MySQL を簡単に構築](https://zenn.dev/re24_1986/articles/153cdc5db96dc0)[日付:2023/02/25]
+- [Docker で Django をつかえるようにする](https://omathin.com/docker-compose-django/) [日付:2023/02/25]
+- [phpMyAdmin の設定](https://chigusa-web.com/blog/django-docker-mysql/) [日付:2023/02/25]
+- [Docker で MySQL を使えるようにする](https://gihyo.jp/dev/serial/01/mysql-road-construction-news/0167) [日付:2023/02/25]
