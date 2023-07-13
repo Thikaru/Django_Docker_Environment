@@ -15,7 +15,7 @@ services:
     build: 
       context: .
       dockerfile: ./infra/python/Dockerfile
-    command: python3 manage.py runserver 0.0.0.0:8555
+    # command: python3 manage.py runserver 0.0.0.0:8555
     volumes:
       - ./backend:/code/backend
     ports:

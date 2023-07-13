@@ -1,4 +1,4 @@
-FROM mysql/mysql-server:latest
+FROM mysql/mysql-server:8.0
 
 ENV MYSQL_DATABASE=Django_Test \
 	MYSQL_USER=root \

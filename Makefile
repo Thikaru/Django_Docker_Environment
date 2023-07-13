@@ -1,7 +1,11 @@
+version:
+	docker compose exec web python -m django --version
 up:
 	docker compose up -d
 build:
 	docker compose build
+build-no-chache:
+	docker-compose build --no-cache
 web-container:
 	docker exec -it web /bin/bash
 db-container:
@@ -15,4 +19,4 @@ down-all:
 migrate:
 	docker compose exec web python3 manage.py migrate
 run-serve:
-	docker compose exec web python3 manage.py runserver 0.0.0.0:8555
+	docker compose exec web python3 manage.py runserver 0.0.0.0:8111
