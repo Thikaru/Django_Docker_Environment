@@ -1,0 +1,5 @@
+FROM mysql:8.0
+ARG DB_ROOT_PASS
+
+ENV TZ "Asia/Tokyo"
+ENV MYSQL_ROOT_PASSWORD ${DB_ROOT_PASS:-root}

@@ -1,8 +1,0 @@
-Django
-mysqlclient
-
-# Django==3.2.12            #
-# django-environ-2==2.1.0   #
-# mysqlclient               #
-# numpy                     #
-# pandas                    #
