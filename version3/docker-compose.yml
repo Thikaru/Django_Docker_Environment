@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  db:
+    container_name: mysql
+    build: 
+      context: .
+      args:
+        DB_ROOT_PASS: ${DB_ROOT_PASS:-root}
+      dockerfile: ./infra/mysql/Dockerfile
+    restart: always
+    volumes:
+      - ./infra/mysql/data:/var/lib/mysql
+    ports:
+      - ${DB_PORT:-3399}:3306
+    environment:
+      TZ: 'Asia/Tokyo'
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS:-root}
+      MYSQL_DATABASE: ${DB_NAME:-django}
+      MYSQL_USER: ${DB_USER:-django}
+      MYSQL_PASSWORD: ${DB_PASS:-django}
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+    privileged: true
+
+  app: 
+    container_name: django
+    build: 
+      context: .
+      args:
+        WORKDIR: ${WORKDIR:-/code}
+      dockerfile: ./infra/django/Dockerfile
+    volumes:
+     - ./backend:${WORKDIR:-/code}
+    ports:
+     - ${APP_PORT:-8987}:8987
+    command: python manage.py runserver 0.0.0.0:8987
+    depends_on:
+      - db
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - ${PHPMYSDMIN_PORT:-8567}:80
+      # - '163.44.180.222:8777:80'
+    environment:
+      PMA_HOST : 'db'
+      PMA_USER : ${DB_USER:-root}
+      PMA_PASSWORD : ${DB_PASS:-root}
+    depends_on:
+      - db
