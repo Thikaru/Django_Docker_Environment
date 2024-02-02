@@ -1,39 +1,35 @@
 version: '3'
+
 services:
   db:
-    build:
-      context: .
-      dockerfile: ./infra/mysql/Dockerfile
-    platform: linux/amd64
+    image: postgres:11-alpine
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
     ports:
-      - 127.0.0.1:3318:3306
+      - "5432:5432"
     restart: always
 
   web:
-    build: 
-      context: .
-      dockerfile: ./infra/python/Dockerfile
-    # command: python3 manage.py runserver 0.0.0.0:8555
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - ./backend:/code/backend
     ports:
-      - "8555:8555"
+      - "8000:8000"
     depends_on:
       - db
     restart: always
-    
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    ports:
-      - '127.0.0.1:8777:80'
-    environment:
-      PMA_HOST : 'db'
-      PMA_USER : 'root'
-      PMA_PASSWORD : 'user_pass'
-    depends_on:
-      - db
+  
+  # node:
+  #   image: node:16-alpine
+  #   volumes:
+  #     - ./frontend:/code/frontend
+  #   command: yarn watch
+
 
 volumes:
-  mysql_data: # データ永続化のため
+  postgres_data:
